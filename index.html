@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Rent-to-buy calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <script src="https:////cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-currency-input@1.3.1/dist/vue-currency-input.umd.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+        <div>
+            <currency-input v-model="earnings" :currency="'EUR'" locale="de" :distraction-free="false"
+        />
+        </div>
+        <div>
+            Alquiler: {{ rent }} €
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                earnings: 40000
+            },
+            computed: {
+                rent: function() {
+                    var earnings = numeral(this.earnings);
+
+                    var net = earnings.multiply(.73);
+                    var monthly = net.divide(12);
+                    var rent = monthly.multiply(.45)
+
+                    return rent.format('0,0');
+                }
+            }
+        });
+
+        numeral.register('locale', 'es-es', {
+            delimiters: {
+                thousands: '.',
+                decimal: ','
+            },
+            abbreviations: {
+                thousand: 'k',
+                million: 'mm',
+                billion: 'b',
+                trillion: 't'
+            },
+            ordinal: function (number) {
+                var b = number % 10;
+                return (b === 1 || b === 3) ? 'er' :
+                    (b === 2) ? 'do' :
+                        (b === 7 || b === 0) ? 'mo' :
+                            (b === 8) ? 'vo' :
+                                (b === 9) ? 'no' : 'to';
+            },
+            currency: {
+                symbol: '€'
+            }
+        });
+
+        // switch between locales
+        numeral.locale('es-es');
+    </script>
+  </body>
+</html>
