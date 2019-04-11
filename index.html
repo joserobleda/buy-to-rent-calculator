@@ -22,7 +22,7 @@
 
         #app {
             max-width: 600px;
-            font-family: gotham, sans-serif;
+            font-family: 'gotham', sans-serif;
             font-weight: 600;
         }
         
@@ -30,13 +30,20 @@
             border: 1px solid #ccc;
             padding: 6px 10px;
             border-radius: 3px;
-            font-size: 40px;
+            font-size: 30px;
+        }
+
+        #app h4 {
+            margin-bottom: .5em;
+        }
+
+        #app h5 {
+            margin-top: 0;
         }
 
         .lucas, .buy  { 
-            font-size: 30px;
+            font-size: 44px;
             font-weight: 800;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .lucas {
@@ -59,12 +66,14 @@
             <tr>
                 <td>
                     <h4>Con Lucas</h4>
+                    <h5>Entrada de un 5%</h5>
                     <div class="lucas">
                         {{ lucas }}€
                     </div>
                 </td>
                 <td>
                     <h4>Compra tradicional</h4>
+                    <h5>Entrada de un 30%</h5>
                     <div class="buy">
                         {{ buy }}€
                     </div>
